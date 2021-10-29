@@ -1,20 +1,57 @@
-import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native'
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Dimensions, ScrollView, FlatList} from 'react-native'
 import { Switch } from 'react-native-gesture-handler';
 import ExpenseItem from './ExpenseItem';
 
+const data =[
+    {
+      id: 0,
+      vendor: 'Soelbergs',
+      price: '$23.50',
+      date: '10/21/21'
+    },
+    {
+      id: 1,
+      vendor: 'Walmart',
+      price: '$100.05',
+      date: '10/22/21'
+    },
+    {
+      id: 2,
+      vendor: 'Costco',
+      price: '$55.30',
+      date: '10/23/21'
+    },
+    {
+      id: 3,
+      vendor: 'Cabelas',
+      price: '$21.21',
+      date: '10/25/21'
+    },
+    {
+      id: 4,
+      vendor: 'Amazon',
+      price: '$200.32',
+      date: '10/28/21'
+    },
+    {
+      id: 5,
+      vendor: 'Papa Johns',
+      price: '$16.16',
+      date: '10/29/21'
+    },
+] 
 
 const AllExpenses = () => {
+  const [itemList, setItemList] = useState(data)
     return (
-      <ScrollView style={styles.allExpensesContainer}>
-        <ExpenseItem vendor='Walmart' price='$1,200' date='10 October 2021' />
-        <ExpenseItem vendor='Target' price='$1,200' date='12 October 2021' />
-        <ExpenseItem vendor='Costco' price='$1,200' date='12 October 2021' />
-        <ExpenseItem vendor='Nike' price='$1,200' date='14 October 2021' />
-        <ExpenseItem vendor='Soelbergs' price='$1,200' date='16 October 2021' />
-        <ExpenseItem vendor='Maverick' price='$1,200' date='15 October 2021' />
-
-      </ScrollView>
+      <FlatList
+      data={itemList}
+      style={styles.allExpensesContainer} 
+      renderItem={({item}) => {
+        return <ExpenseItem vendor={item.vendor} price={item.price} date={item.date} />
+      }}
+      />
     );
 }
 
@@ -23,7 +60,7 @@ const AllExpenses = () => {
 const styles = StyleSheet.create({
     allExpensesContainer: {
         flex: 1,
-        marginTop: -65,
+        marginTop: -75,
         backgroundColor: 'white',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
@@ -40,3 +77,6 @@ const styles = StyleSheet.create({
 })
 
 export default AllExpenses;
+
+
+

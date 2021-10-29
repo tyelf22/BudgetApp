@@ -35,7 +35,7 @@ const TotalSpent = () => {
 
 const styles = StyleSheet.create({
     spentContainer: {
-        flex: 0.5,
+        flex: 0.35,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

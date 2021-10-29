@@ -33,7 +33,7 @@ const BudgetBar = () => {
 const styles = StyleSheet.create({
     barContainer: {
         height: 200,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        backgroundColor: 'rgba(255, 255, 255, 0.85)',
         borderRadius: 30,
         paddingHorizontal: 35,
         paddingTop: 40
