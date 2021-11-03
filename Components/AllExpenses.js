@@ -1,63 +1,66 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Dimensions, ScrollView, FlatList} from 'react-native'
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, Dimensions, ScrollView, FlatList, ActivityIndicator} from 'react-native'
 import { Switch } from 'react-native-gesture-handler';
 import ExpenseItem from './ExpenseItem';
 
-const data =[
-    {
-      id: 0,
-      vendor: 'Soelbergs',
-      price: '$23.50',
-      date: '10/21/21'
-    },
-    {
-      id: 1,
-      vendor: 'Walmart',
-      price: '$100.05',
-      date: '10/22/21'
-    },
-    {
-      id: 2,
-      vendor: 'Costco',
-      price: '$55.30',
-      date: '10/23/21'
-    },
-    {
-      id: 3,
-      vendor: 'Cabelas',
-      price: '$21.21',
-      date: '10/25/21'
-    },
-    {
-      id: 4,
-      vendor: 'Amazon',
-      price: '$200.32',
-      date: '10/28/21'
-    },
-    {
-      id: 5,
-      vendor: 'Papa Johns',
-      price: '$16.16',
-      date: '10/29/21'
-    },
-] 
+import {useDate, useDateNext, useDatePrev} from '../Context/DateContext'
+
 
 const AllExpenses = () => {
-  const [itemList, setItemList] = useState(data)
+  const [itemList, setItemList] = useState([])
+  const newDate = useDate()
+  const nextDate = useDateNext()
+  const prevDate = useDatePrev()
+
+  const fetchData = () => {
+    return fetch("https://te-budget-app.herokuapp.com/expenses")
+      .then((response) => response.json())
+      .then((data) => {
+        let result = data.filter(el => new Date(el.date).getMonth() + 1 == newDate[0])
+        setItemList(result)
+      });
+  }
+  
+  useEffect(() => {
+    console.log(useDate)
+    fetchData();
+    }, []);
+
+    useEffect(() => {
+      fetchData();
+    }, [newDate]);
+
+  if(itemList.length <= 0){
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="white"/>
+      </View>
+    )
+  }else {
     return (
       <FlatList
       data={itemList}
       style={styles.allExpensesContainer} 
+      keyExtractor={(item, index) => index.toString()} 
       renderItem={({item}) => {
-        return <ExpenseItem vendor={item.vendor} price={item.price} date={item.date} />
+          let theDate = new Date(item.date)
+          let monthDate = theDate.getMonth() + 1
+          let dayDate = theDate.getDate()
+          let yearDate = theDate.getFullYear()
+          return <ExpenseItem vendor={item.vendor} price={item.price} date={`${monthDate}/${dayDate}/${yearDate}`} />
       }}
       />
     );
+  }
+
 }
 
-
-
 const styles = StyleSheet.create({
+
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+    },
     allExpensesContainer: {
         flex: 1,
         marginTop: -75,
@@ -65,7 +68,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         paddingHorizontal: 35,
-
 
 
         shadowColor: '#000',

@@ -1,14 +1,36 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native'
+
+import {useDate, useDateNext, useDatePrev} from '../Context/DateContext'
+
+
+const allMonths = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December",
+}
 
 
 const TotalSpent = () => {
+    const newDate = useDate()
+    const nextDate = useDateNext()
+    const prevDate = useDatePrev()
+
     return (
       <View  style={styles.spentContainer}>
         <TouchableOpacity 
             
             style={styles.backArrowContainer}
-            onPress={() => console.log("arrow touched")}
+            onPress={() => prevDate()}
         >
             <Image
                 source={require('../Images/back.png')}
@@ -16,13 +38,13 @@ const TotalSpent = () => {
             />
         </TouchableOpacity>
         <View style={styles.monthContainer}>
-            <Text style={styles.monthText}>October 2021</Text>
+            <Text style={styles.monthText}>{allMonths[newDate[0]]} {newDate[1]}</Text>
             <Text style={styles.spentText}>$5,650</Text>
         </View>
         <TouchableOpacity 
             
             style={styles.nextArrowContainer}
-            onPress={() => console.log("arrow touched")}
+            onPress={() => nextDate()}
         >
             <Image
                 source={require('../Images/next.png')}

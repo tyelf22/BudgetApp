@@ -3,15 +3,17 @@ import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import {LinearGradient} from 'expo-linear-gradient'
 
-import  ExpenseItem from './Components/ExpenseItem'
+import ExpenseItem from './Components/ExpenseItem'
 import Header from './Components/Header'
 import TotalSpent from './Components/TotalSpent'
 import BudgetBar from './Components/BudgetBar'
 import AllExpenses from './Components/AllExpenses'
 
+//Get my global date 
+import { DateProvider } from './Context/DateContext'
+
 export default function App() {
   return (
-
 
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -28,9 +30,11 @@ export default function App() {
         y: 0.7
       }}
       style={styles.box} />
+      <DateProvider>
         <TotalSpent/>
         <BudgetBar/>
         <AllExpenses/>
+      </DateProvider>
     </SafeAreaView>
 
   );

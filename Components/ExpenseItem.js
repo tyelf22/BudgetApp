@@ -1,18 +1,40 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 // FONT AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faCheckSquare, faCoffee)
+//library.add(fab, faCheckSquare, faCoffee)
+
+const allMonths = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December",
+}
 
 const ExpenseItem = (props) => {
     const rightSwipe = () => {
         return(
             <View style={styles.deleteBox}>
-                <Text style={styles.deleteBoxText}>Delete</Text>
-                <FontAwesomeIcon icon="coffee" />
+                {/* <Text style={styles.deleteBoxText}>Delete</Text> */}
+                
+                <TouchableOpacity 
+                    style={styles.deleteBtn}
+                    onPress={() => console.log("arrow touched")}
+                >
+                    <FontAwesomeIcon style={styles.icons} icon={ faTrash } size={ 22 } />
+                </TouchableOpacity>
+
             </View>
         )
     }
@@ -25,7 +47,7 @@ const ExpenseItem = (props) => {
             <View  style={styles.itemContainer}>
                 <View style={styles.topText}>
                     <Text style={styles.itemVendor}>{props.vendor}</Text>
-                    <Text style={styles.itemPrice}>{props.price}</Text>
+                    <Text style={styles.itemPrice}>${props.price}</Text>
                 </View>
                 <Text style={styles.itemDate}>{props.date}</Text>
             </View>
@@ -66,9 +88,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 100,
     },
+    deleteBtn: {
+        height: 100,
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     deleteBoxText: {
         color: 'white',
         fontSize: 16
+    },
+    icons: {
+        color: 'white',
     }
 })
 

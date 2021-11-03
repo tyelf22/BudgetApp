@@ -1,0 +1,90 @@
+[
+    {
+        "vendor": "Wally World",
+        "price": {
+            "$numberDecimal": "100.05"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1634904000"
+            }
+        }
+    },
+    {
+        "vendor": "Costco",
+        "price": {
+            "$numberDecimal": "55.22"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1634990400"
+            }
+        }
+    },
+    {
+        "vendor": "Cabelas",
+        "price": {
+            "$numberDecimal": "88.88"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1635163200"
+            }
+        }
+    },
+    {
+        "vendor": "Payless",
+        "price": {
+            "$numberDecimal": "20.11"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1635163200"
+            }
+        }
+    },
+    {
+        "vendor": "Cal Ranch",
+        "price": {
+            "$numberDecimal": "65.21"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1635163200"
+            }
+        }
+    },
+    {
+        "vendor": "Mo Behttas",
+        "price": {
+            "$numberDecimal": "32.66"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1635163200"
+            }
+        }
+    },
+    {
+        "vendor": "Wendys",
+        "price": {
+            "$numberDecimal": "50.66"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1635163200"
+            }
+        }
+    },
+    {
+        "vendor": "Venmo",
+        "price": {
+            "$numberDecimal": "90.88"
+        },
+        "date": {
+            "$date": {
+                "$numberLong": "1635163200"
+            }
+        }
+    }
+]
