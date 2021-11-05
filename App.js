@@ -9,8 +9,9 @@ import TotalSpent from './Components/TotalSpent'
 import BudgetBar from './Components/BudgetBar'
 import AllExpenses from './Components/AllExpenses'
 
-//Get my global date 
+//Get my global date & total
 import { DateProvider } from './Context/DateContext'
+import { TotalProvider } from './Context/TotalContext'
 
 export default function App() {
   return (
@@ -31,9 +32,11 @@ export default function App() {
       }}
       style={styles.box} />
       <DateProvider>
+      <TotalProvider>
         <TotalSpent/>
         <BudgetBar/>
         <AllExpenses/>
+      </TotalProvider>
       </DateProvider>
     </SafeAreaView>
 

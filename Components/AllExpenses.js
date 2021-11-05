@@ -3,20 +3,25 @@ import {View, Text, StyleSheet, Dimensions, ScrollView, FlatList, ActivityIndica
 import { Switch } from 'react-native-gesture-handler';
 import ExpenseItem from './ExpenseItem';
 
-import {useDate, useDateNext, useDatePrev} from '../Context/DateContext'
+import {useDate} from '../Context/DateContext'
+import {useTotal, SetTotalContext} from '../Context/TotalContext'
 
 
 const AllExpenses = () => {
   const [itemList, setItemList] = useState([])
+  const priceList = []
+
   const newDate = useDate()
-  const nextDate = useDateNext()
-  const prevDate = useDatePrev()
 
   const fetchData = () => {
     return fetch("https://te-budget-app.herokuapp.com/expenses")
       .then((response) => response.json())
       .then((data) => {
-        let result = data.filter(el => new Date(el.date).getMonth() + 1 == newDate[0])
+        let result = data.filter(el => ( (new Date(el.date).getMonth() + 1 == newDate[0]) && (new Date(el.date).getFullYear() == newDate[1]) ))
+        console.log('result = ', result)
+        result.forEach(el => priceList.push(el.price))
+        SetTotalContext(priceList) //NOT FOUND!!!
+        // let tot = data.reduce((prev, curr) => ) //TRY TO REDUCE THE ARRAY OF OBJECT 
         setItemList(result)
       });
   }
